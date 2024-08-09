@@ -3,6 +3,8 @@ import amaLogo from "../assets/ama-logo.svg"
 import { ArrowRight, Share2 } from "lucide-react"
 import { toast } from "sonner"
 import { Message } from "../components/message"
+import { Messages } from "../components/messages"
+import { Suspense } from "react"
 
 export function Room() {
     const { roomId } = useParams()
@@ -63,13 +65,9 @@ export function Room() {
                 </button>
             </form>
 
-            <ol className="list-decimal list-outside px-3 space-y-8">
-                <Message text='Qual é a maneira mais criativa que você já resolveu um problema de programação?' amountOfReactions={100} answered />
-                <Message text='Qual é a sua linguagem de programação favorita e por quê?' amountOfReactions={50} />
-                <Message text='Qual é o maior desafio que você já enfrentou ao desenvolver um projeto?' amountOfReactions={75} />
-                <Message text='Qual é a sua abordagem para lidar com bugs em seu código?' amountOfReactions={80} />
-                <Message text='Qual é a sua opinião sobre o uso de frameworks no desenvolvimento de software?' amountOfReactions={90} />
-            </ol>
+            <Suspense fallback={<p>Carregando...</p>}>
+                <Messages />
+            </Suspense>
         </main>
     )
 }
